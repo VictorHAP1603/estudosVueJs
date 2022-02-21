@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro teste Vue js</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>  
+    <div id="app">
+        <h1>Olá, {{ nome }}</h1>
+
+        <p>Camisas - R$ <span>{{ preco }}</span></p>
+
+        <button @click="total++">Adicionar</button>
+        <button @click="total--">Remover</button>
+
+        <span>{{ total }}</span>
+        <p>Total: <span>{{ desconto }}</span></p>
+
+        <div v-if="desconto > 200">
+            <h1>Parabens! Conseguiu desconto</h1>
+        </div>  
+    </div>
+<!-- 
+    <div id="square">
+        <p>Lado: {{lado}}</p>
+        <p>Perimetro: {{ lado * 4 }}</p>
+        <p>Area: {{ lado * lado }}</p>
+    </div> -->
+
+    <script>    
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                nome: 'Victor',
+                preco: 60,
+                total: 0
+            },
+            methods: {
+                  
+            },
+            computed: {
+                desconto() {
+                    return this.preco * this.total
+                }
+            }   
+        });
+
+
+
+        // const vm2 = new Vue({
+        //     el: "#square",
+        //     data: {
+        //         lado: 10
+        //     },
+           
+        // });
+    </script>
+
+
+</body>
+</html>

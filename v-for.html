@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro teste Vue js</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <style>
+       
+    </style>
+
+</head>
+<body>  
+    <!-- <div id="app">
+        <ul>
+            <li v-for="(curso, index) in cursos" :key="curso">
+                {{ curso }} - {{ index }} 
+                <button @click="removerItem(index)">Remover Item</button> 
+            </li>
+
+            <button @click="modificarItem">Modificar Item</button>
+        </ul>
+
+        =====================
+
+        <ul>
+            <li v-for="{nome, populacao}, key, index in estados" :key="key">
+                {{nome}} - {{ key.toUpperCase() }} - {{populacao}}
+            </li>
+        </ul>
+    </div> -->
+
+    <div id="ex">
+
+    </div>
+
+    <script>    
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                cursos: ["PHP", "Laravel", "Javascript", "HTML", "CSS"],
+                estados: {
+                    sp: {
+                        populacao: "45 milhoes",
+                        nome: "São Paulo"
+                    },
+
+                    mg: {
+                        populacao: "21 milhoes",
+                        nome: "Minas Gerais"
+                    },
+
+                    rj: {
+                        populacao: "17 milhoes",
+                        nome: "Rio de Janeiro"
+                    }
+                }
+            },
+
+            methods: {  
+                removerItem(index) {
+                    this.cursos.splice(index, 1)
+                },
+
+                modificarItem() {
+                    this.$set(this.cursos, 0, "Banana")
+                }
+            }   
+        });
+
+        const vm2 = new Vue({
+            
+        })
+    </script>
+</body>
+</html>

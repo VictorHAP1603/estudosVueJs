@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro teste Vue js</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>  
+    <div id="app">
+        <h1>{{ total }}</h1>
+
+        <button @click="increment">Incrementar</button>
+        <button @click="diminuir">Diminuir</button>
+
+
+        <p>{{ instrumento }}</p>
+
+        <button @click="mudarInstrumento('Guitarra')">Guitarra</button>
+        <button @click="mudarInstrumento('Violao')">Violao</button>
+
+
+        <h1>Info Github</h1>
+        <input type="text" v-model="username" placeholder="Username GitHub">
+        <button @click="getRepositories()">Pesquisar</button>
+
+        <div v-if="dataUser">
+            <p>Login: {{ dataUser.login }}</p>
+            <p>Nome: {{ dataUser.name }}</p>
+            <p>Perfil: <a :href="dataUser.html_url">{{ dataUser.html_url }}</a></p>
+        </div>
+
+    </div>
+
+    <script>    
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                total: 0,
+                instrumento: "",
+                username: "VictorHAP1603",
+                dataUser: null
+            },
+
+            methods: {
+                increment() {
+                    this.total++
+                },
+
+                diminuir() {
+                    if (this.total > 0) {
+                        this.total--
+                    }
+                },
+
+                mudarInstrumento(instrumento) {
+                    this.instrumento = instrumento
+                },
+
+                async getRepositories() {
+
+                    if (this.username !== '') {
+                        console.log(this.username);
+                        const json = await (await fetch(`https://api.github.com/users/${this.username}`)).json();
+
+                        console.log(json)
+                        this.dataUser = json
+                    }   
+                }
+            }   
+        });
+    </script>
+
+
+</body>
+</html>

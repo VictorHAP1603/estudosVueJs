@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro teste Vue js</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 40px;
+        }
+
+        .product__container {
+            margin: 40px 20px;
+        }
+
+        .product__item {
+            height: 300px;
+            width: 250px;
+
+            display: flex;
+            flex-direction: column;
+
+            border: 1px solid black;
+        }
+
+        .product__header {
+            flex: 0.5;
+            background-color: red;
+        }
+        
+
+        .product__content {
+            flex: 0.5;
+            /* text-align: center; */
+            padding: 10px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product__content > div  {
+            text-align: center;
+            align-self: center;
+            font-size: 18px;
+
+        }
+
+        .product__content button {
+           padding: 10px;
+           border-radius: 6px;
+           border: 1px solid #ccc;
+           cursor: pointer;
+        }
+        .product__content button:disabled {
+            cursor: not-allowed;
+            opacity: .6;
+        }
+        
+    </style>
+
+</head>
+<body>  
+    <!-- <div id="app">
+
+        <p v-f="logado">Logado</p>
+        <p v-show="logado">Nao Logado</p>
+
+
+      <template v-if="logado">
+        <p>Olá</p>
+        <button @click="logado = false">Deslogar</button>
+      </template>
+
+      <template v-else>
+        <p>Nao esta Logado</p>
+      </template>
+    </div> -->
+
+    <!-- Exercicio  -->
+
+    <div id="ex">
+        <p>Produtos no carrinho: {{ produtos }}</p>
+        <button :disabled="produtos === 0" @click="removeProductFromCart">Remover do carrinho</button>
+
+        <div class="product__container">
+
+            <div class="product__item">
+                <div class="product__header"></div>
+
+                <div class="product__content">
+                    <div>
+                        <p>Produto</p>
+                        <p>Em estoque: {{ estoque - produtos }}</p>
+                    </div>
+
+                    <button :disabled="passouDoLimite" @click="addProductCart">Adicionar ao carrinho</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>    
+        const vm = new Vue({
+            el: "#ex",
+            data: {
+               produtos: 0,
+               estoque: 7,
+               passouDoLimite: false
+            },
+
+            methods: {  
+              addProductCart() {
+                if (this.produtos < this.estoque) {
+                    this.produtos++
+
+                    if (this.produtos === this.estoque) {
+                        this.passouDoLimite = true
+                    }
+
+                } else {
+                    this.passouDoLimite = true
+                }
+              },
+
+              removeProductFromCart() {
+                  if (this.produtos > 0) {
+                      this.produtos--
+
+                      if (this.produtos < this.estoque) {
+                        this.passouDoLimite = false
+                      }
+                  }
+              }
+
+            }   
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro teste Vue js</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <style>
+         a {
+            display: block;
+            margin: 10px 0;
+         }
+    </style>
+
+</head>
+<body>  
+    <div id="app">
+        <button @click="ativo = !ativo">Toggle</button>
+        <span>{{ ativo }}</span>
+
+        <div>
+            <a href="#interno" @click.prevent>Link interno Previnido</a>
+            <a href="#internoOnce" @click.prevent.once>Link interno Previnido Once</a>
+        </div>
+
+        <input type="text" @keyup.f.d.enter="handleClick">
+
+        <p @mousemove="handleMove">Esse é o mouse X: {{ mouse.x }}</p>
+    </div>
+
+    <script>    
+        const vm = new Vue({
+            el: "#app",
+            data: {
+               ativo: false,
+               mouse: ''
+            },
+
+            methods: {
+                handleClick(e) {
+                    console.log(e.key)
+                }, 
+
+                handleMove(e) {
+                    this.mouse = e
+                }
+            }   
+        });
+    </script>
+
+
+</body>
+</html>
